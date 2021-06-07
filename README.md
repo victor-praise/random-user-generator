@@ -1,6 +1,4 @@
-# LumbexAssesment
-
-Random User Generator;
+# Random User Generator;
 
 ## Development server
 
