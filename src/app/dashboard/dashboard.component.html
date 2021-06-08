@@ -1,3 +1,38 @@
 <div class="container">
-  
+  <div class="intro-user-select-container">
+      <div class="intro-user-content">
+        <div class="header">
+          <div class="header-one">
+            Hello, <span style="font-weight: 700;">Lumbex</span>
+          </div>
+          <div class="header-two">
+            Welcome to your dashboard, kindly sort through the users
+          </div>
+        </div>
+        <div class="user-select">
+            <span class="user-select-header"> Show users </span>
+            <div class="user-select-card card1">
+              <img src="../../assets/images/3 Friends.png" alt="all_users"> All users
+            </div>
+            <div class="user-select-card card2">
+              <img src="../../assets/images/female.png" alt="female_users"> Female users
+            </div>
+            <div class="user-select-card card3">
+              <img src="../../assets/images/male.png" alt="male_users"> Male users
+            </div>
+        </div>
+      </div>
+  </div>
+  <div class="display-user-container">
+    <div class="display-user-content">
+      <input type="text" name="" placeholder="search testing" [(ngModel)]="some">
+
+      <ul>
+        <li *ngFor="let test of testArray | filter:some | paginate: { itemsPerPage: 10, currentPage: p, totalItems: testArray.length}">
+          {{test.email}}
+        </li>
+      </ul>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
 </div>

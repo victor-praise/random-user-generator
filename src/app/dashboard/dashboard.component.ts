@@ -12,6 +12,9 @@ export class DashboardComponent implements OnInit {
 
   seed;
   pageNo=0;
+  some;
+  p: number = 1;
+  testArray: string[];
   constructor(private apiCall:ApiCallService) { }
 
   Next(){
@@ -50,6 +53,7 @@ export class DashboardComponent implements OnInit {
     )
     this.apiCall.getFemaleUsers().subscribe(
       res=>{
+        this.testArray=res.results;
         console.log('female', res);
 
       }

@@ -20,7 +20,7 @@ export class ApiCallService {
   }
 
   getFemaleUsers():Observable<any>{
-    return this.httpClient.get('https://randomuser.me/api/?results=500&gender=female',this.authHeader())
+    return this.httpClient.get('https://randomuser.me/api/?results=50&gender=female',this.authHeader())
   }
 
   getPagination(seed,pageNo):Observable<any>{
