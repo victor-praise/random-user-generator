@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../api-call.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,55 +11,71 @@ import { ApiCallService } from '../api-call.service';
 
 export class DashboardComponent implements OnInit {
 
-  seed;
-  pageNo=0;
-  some;
-  p: number = 1;
-  testArray: string[];
-  constructor(private apiCall:ApiCallService) { }
+  arrayLength: any;
+  custom: string = 'custom';
+  dataArray = [];
+  pageNumber = 1;
+  search;
+  singleUser;
+  userType;
+  viewAllUsers:boolean=true;
+  viewUser:boolean=false;
 
-  Next(){
-    this.pageNo+=1;
-    console.log(this.pageNo);
-
-    this.apiCall.getPagination(this.seed,this.pageNo).subscribe(
-      res=>{
-        console.log('pagination response',res);
-
-      }
-    )
+  constructor(private apiCall:ApiCallService, private router:Router) {
 
   }
 
-  Previous(){
-    this.pageNo-=1;
-    console.log(this.pageNo);
-    this.apiCall.getPagination(this.seed, this.pageNo).subscribe(
-      res => {
-        console.log('pagination response previous', res);
+  displayUser=(usertype)=>{
 
-      }
-    )
+    switch (usertype) {
+      case 0:
+      this.apiCall.getUser().subscribe(
+        res=>{
+          this.dataArray=res.results;
+          console.log('all users',this.dataArray);
+
+          this.userType='All Users';
+        }
+      )
+      break;
+
+      case 1:
+        this.apiCall.getFemaleUsers().subscribe(
+          res => {
+            this.dataArray = res.results;
+            this.userType = 'Female Users';
+            console.log('female users', this.dataArray);
+          }
+        )
+        break;
+
+      case 2:
+        this.apiCall.getMaleUsers().subscribe(
+          res => {
+            this.dataArray = res.results;
+            this.userType = 'Male Users';
+            console.log('male users', this.dataArray);
+          }
+        )
+        break;
+
+      default:
+        break;
+    }
+
 
 
   }
+
+dynamicParameter = (email) =>{
+  this.viewAllUsers=false;
+  this.viewUser=true;
+  this.singleUser = this.dataArray.filter(testing => email == testing.email);
+  this.router.navigateByUrl('/dashboard/user', { state: this.singleUser });
+}
 
   ngOnInit(): void {
-    this.apiCall.getUser().subscribe(
-      res=>{
-        this.seed = res.info.seed;
-        console.log(res);
-
-      }
-    )
-    this.apiCall.getFemaleUsers().subscribe(
-      res=>{
-        this.testArray=res.results;
-        console.log('female', res);
-
-      }
-    )
-
+    this.displayUser(0);
   }
 
 }

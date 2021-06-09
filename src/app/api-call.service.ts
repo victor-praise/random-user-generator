@@ -16,14 +16,13 @@ export class ApiCallService {
   }
 
   getUser():Observable<any>{
-    return this.httpClient.get('https://randomuser.me/api/?results=20', this.authHeader())
+    return this.httpClient.get('https://randomuser.me/api/?results=200', this.authHeader())
   }
 
   getFemaleUsers():Observable<any>{
-    return this.httpClient.get('https://randomuser.me/api/?results=50&gender=female',this.authHeader())
+    return this.httpClient.get('https://randomuser.me/api/?results=100&gender=female',this.authHeader())
   }
-
-  getPagination(seed,pageNo):Observable<any>{
-    return this.httpClient.get(`https://randomuser.me/api/?page=${pageNo}&results=20&seed=${seed}`)
+  getMaleUsers():Observable<any>{
+    return this.httpClient.get('https://randomuser.me/api/?results=100&gender=male',this.authHeader())
   }
 }

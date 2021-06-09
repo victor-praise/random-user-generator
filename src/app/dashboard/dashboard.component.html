@@ -11,13 +11,13 @@
         </div>
         <div class="user-select">
             <span class="user-select-header"> Show users </span>
-            <div class="user-select-card card1">
+            <div class="user-select-card card1" (click)="displayUser(0)">
               <img src="../../assets/images/3 Friends.png" alt="all_users"> All users
             </div>
-            <div class="user-select-card card2">
+            <div class="user-select-card card2" (click)="displayUser(1)">
               <img src="../../assets/images/female.png" alt="female_users"> Female users
             </div>
-            <div class="user-select-card card3">
+            <div class="user-select-card card3" (click)="displayUser(2)">
               <img src="../../assets/images/male.png" alt="male_users"> Male users
             </div>
         </div>
@@ -25,14 +25,48 @@
   </div>
   <div class="display-user-container">
     <div class="display-user-content">
-      <input type="text" name="" placeholder="search testing" [(ngModel)]="some">
+      <span class="user-type">{{userType}}</span>
+      <div class="search-toggle-user">
+        <div class="search">
+        <i class="fas fa-search"></i> <input type="text" name="" placeholder="Find a user" [(ngModel)]="search">
+        </div>
+        <div class="toggle-user">
+          showcountry
+        </div>
+      </div>
 
-      <ul>
-        <li *ngFor="let test of testArray | filter:some | paginate: { itemsPerPage: 10, currentPage: p, totalItems: testArray.length}">
-          {{test.email}}
-        </li>
-      </ul>
-          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+      <div class="view-all-users" *ngIf="viewAllUsers">
+            <ul>
+              <li (click)="dynamicParameter(users.email)"
+                *ngFor="let users of dataArray | filter:search | paginate: {itemsPerPage: 5,currentPage: pageNumber, totalItems: dataArray.length, id:custom}">
+                {{users.email}}
+              </li>
+            </ul>
+      </div>
+
+      <div class="view-individaul-user" *ngIf="viewUser">
+        <router-outlet></router-outlet>
+      </div>
+
+
+        <pagination-template #p="paginationApi" [id]="custom" (pageChange)="pageNumber = $event">
+          <div class="custom-pagination">
+            <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+              <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
+                something </span>
+            </div>
+            <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+              <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value" style="display: none;">{{ page.label }}</span>
+              <div *ngIf="p.getCurrent() === page.value">
+                <span style="display: none;">{{ page.label }}</span>
+              </div>
+            </div>
+            <div class="pagination-next" [class.disabled]="p.isLastPage()">
+              <span *ngIf="!p.isLastPage()" (click)="p.next()"> > fdfdffd</span>
+            </div>
+          </div>
+
+        </pagination-template>
     </div>
   </div>
 </div>
