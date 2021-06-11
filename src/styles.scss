@@ -3,3 +3,55 @@ body{
   margin: 0;
   padding: 0;
 }
+
+.users-card,
+.user-contact,
+.phone-number,
+.email {
+  display: flex;
+  align-items: center;
+}
+.users-card {
+  border-radius: 10px;
+  background-color: #fff;
+  color: rgba(37, 42, 62, 0.5);
+  padding: 25px;
+  font-size: 0.65rem;
+  font-style: italic;
+  margin-bottom: 7px;
+  cursor: pointer;
+  .profile-picture {
+    img {
+      border-radius: 100%;
+      border: 3px solid #335aa3;
+    }
+  }
+}
+.user-details {
+  margin-left: 20px;
+  .user-name {
+    color: rgba(37, 42, 62, 1);
+    font-size: 0.85rem;
+    font-style: normal;
+  }
+  .user-contact,
+  .user-address {
+    margin-top: 5px;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .email,
+  .phone-number {
+    img {
+      width: 10%;
+      margin-right: 5px;
+    }
+  }
+  .phone-number{
+    margin-left: 10px;
+  }
+  .user-address {
+    font-size: 0.75rem;
+  }
+}

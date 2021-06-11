@@ -1,0 +1,49 @@
+<div class="display-user-content">
+  <span class="user-type">{{userType}}</span>
+  <div class="search-toggle-user">
+    <div class="search">
+      <i class="fas fa-search"></i> <input type="text" name="" placeholder="Find a user" [(ngModel)]="search">
+    </div>
+    <div class="toggle-user">
+      showcountry
+    </div>
+  </div>
+
+  <div class="view-all-users">
+    <div class="users-card" (click)="dynamicParameter(users.email)"
+      *ngFor="let users of dataArray | filter:search | paginate: {itemsPerPage: 4,currentPage: pageNumber, totalItems: dataArray.length, id:custom}"
+      >
+      <div class="profile-picture">
+        <img src="{{users.picture.thumbnail}}" alt="user">
+      </div>
+      <div class="user-details">
+        <div class="user-name">{{users.name.first}} {{users.name.last}}</div>
+        <div class="user-address">2972 Westheimer Rd. Santa Ana, Illinois 85486</div>
+        <div class="user-contact">
+          <div class="email"><img src="../../assets/images/Message.svg" alt="email_image"> {{users.email}}</div>
+          <div class="phone-number"><img src="../../assets/images/Call.svg" alt="call_image"> {{users.phone}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <router-outlet></router-outlet> -->
+  <pagination-template #p="paginationApi" [id]="custom" (pageChange)="pageNumber = $event">
+    <div class="custom-pagination">
+      <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+        <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
+          something </span>
+      </div>
+      <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+        <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value" style="display: none;">{{
+          page.label }}</span>
+        <div *ngIf="p.getCurrent() === page.value">
+          <span style="display: none;">{{ page.label }}</span>
+        </div>
+      </div>
+      <div class="pagination-next" [class.disabled]="p.isLastPage()">
+        <span *ngIf="!p.isLastPage()" (click)="p.next()"> > fdfdffd</span>
+      </div>
+    </div>
+
+  </pagination-template>
+</div>

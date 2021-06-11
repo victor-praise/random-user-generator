@@ -13,14 +13,8 @@ export class DashboardComponent implements OnInit {
 
   arrayLength: any;
   custom: string = 'custom';
-  dataArray = [];
-  pageNumber = 1;
-  search;
-  singleUser;
+  dataArrays = [];
   userType;
-  viewAllUsers:boolean=true;
-  viewUser:boolean=false;
-
   constructor(private apiCall:ApiCallService, private router:Router) {
 
   }
@@ -31,9 +25,7 @@ export class DashboardComponent implements OnInit {
       case 0:
       this.apiCall.getUser().subscribe(
         res=>{
-          this.dataArray=res.results;
-          console.log('all users',this.dataArray);
-
+          this.dataArrays=res.results;
           this.userType='All Users';
         }
       )
@@ -42,9 +34,8 @@ export class DashboardComponent implements OnInit {
       case 1:
         this.apiCall.getFemaleUsers().subscribe(
           res => {
-            this.dataArray = res.results;
+            this.dataArrays = res.results;
             this.userType = 'Female Users';
-            console.log('female users', this.dataArray);
           }
         )
         break;
@@ -52,9 +43,8 @@ export class DashboardComponent implements OnInit {
       case 2:
         this.apiCall.getMaleUsers().subscribe(
           res => {
-            this.dataArray = res.results;
+            this.dataArrays = res.results;
             this.userType = 'Male Users';
-            console.log('male users', this.dataArray);
           }
         )
         break;
@@ -62,20 +52,14 @@ export class DashboardComponent implements OnInit {
       default:
         break;
     }
-
-
-
   }
 
-dynamicParameter = (email) =>{
-  this.viewAllUsers=false;
-  this.viewUser=true;
-  this.singleUser = this.dataArray.filter(testing => email == testing.email);
-  this.router.navigateByUrl('/dashboard/user', { state: this.singleUser });
-}
+
 
   ngOnInit(): void {
     this.displayUser(0);
   }
+
+
 
 }
