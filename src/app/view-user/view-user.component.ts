@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-view-user',
@@ -7,19 +7,20 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./view-user.component.scss']
 })
 export class ViewUserComponent implements OnInit {
-  user
-  constructor(private router: Router, private route:ActivatedRoute) {
-    this.route.params.subscribe(params => console.log(params))
+  user = JSON.parse(localStorage.getItem('user'));
+  constructor(private router: Router,) {
+
    }
 
   back=()=>{
-    this.router.navigate([''])
-    //this.router.navigate(['dashboard/user', this.singleUser[0].email])
+    localStorage.clear()
+    this.router.navigate(['dashboard/users', 'allUsers'])
+
   }
   ngOnInit(): void {
-    this.user=history.state;
     console.log(this.user);
 
   }
+
 
 }

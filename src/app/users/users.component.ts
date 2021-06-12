@@ -1,5 +1,5 @@
-import { Component, OnInit,Input, OnChanges } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from '../api-call.service';
 
 @Component({
@@ -7,84 +7,89 @@ import { ApiCallService } from '../api-call.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit, OnChanges {
-  // @Input() userType: string;
-  // @Input() dataArrays: [];
-  arrayLength: any;
+export class UsersComponent implements OnInit {
   custom: string = 'custom';
   dataArray = [];
-  pageNumber = 1;
-  search;
+  pageNumber:number = 1;
+  search:string;
   singleUser;
-  userType;
+  userType:string;
+  apiError;
 
 
-  viewAllUsers: boolean = true;
-  viewUser: boolean = false;
+  constructor(private apiCall: ApiCallService, private router: Router, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      switch (params.usertype) {
+        case 'allUsers':
+        this.displayAllUsers();
+          break;
 
-  constructor(private apiCall: ApiCallService, private router: Router) {
+        case 'femaleUsers':
+          this.displayFemaleUsers();
+          break;
+
+        case 'maleUsers':
+          this.displayMaleUsers();
+          break;
+
+        default:
+          break;
+      }
+    });
+
+
 
   }
-
-  displayUser = (usertype) => {
-
-    switch (usertype) {
-      case 0:
-        this.apiCall.getUser().subscribe(
-          res => {
-            this.dataArray = res.results;
-            console.log('all users', this.dataArray);
-            this.userType = 'All Users';
-          }
-        )
-        break;
-
-      case 1:
-        this.apiCall.getFemaleUsers().subscribe(
-          res => {
-            this.dataArray = res.results;
-            this.userType = 'Female Users';
-            console.log('female users', this.dataArray);
-          }
-        )
-        break;
-
-      case 2:
-        this.apiCall.getMaleUsers().subscribe(
-          res => {
-            this.dataArray = res.results;
-            this.userType = 'Male Users';
-            console.log('male users', this.dataArray);
-          }
-        )
-        break;
-
-      default:
-        break;
-    }
+  // displays all users
+  displayAllUsers=()=>{
+    this.apiCall.getUser().subscribe(
+      res => {
+        this.dataArray = res.results;
+        this.userType = 'All Users';
+      },
+      err=>{
+        this.apiError=err;
+      }
+    )
   }
 
-  dynamicParameter = (email) => {
-    this.viewAllUsers = false;
-    this.viewUser = true;
+  // displays only male users
+  displayMaleUsers=()=>{
+    this.apiCall.getMaleUsers().subscribe(
+      res => {
+        this.dataArray = res.results;
+        this.userType = 'Male Users';
+      },
+      err => {
+        this.apiError = err;
+      }
+    )
+  }
+
+  // // displays only female users
+  displayFemaleUsers=()=>{
+    this.apiCall.getFemaleUsers().subscribe(
+      res => {
+        this.dataArray = res.results;
+        this.userType = 'Female Users';
+      },
+      err => {
+        this.apiError = err;
+      }
+    )
+  }
+
+
+  // filters array of users for particular user clicked and stores data to localstorage
+  dynamicUser = (email) => {
     this.singleUser = this.dataArray.filter(user => email == user.email);
-    // localStorage.setItem('user', JSON.stringify(this.singleUser));
-    this.router.navigateByUrl('/dashboard/user', { state: this.singleUser });
+     localStorage.setItem('user', JSON.stringify(this.singleUser));
+    this.router.navigate(['dashboard/user', this.singleUser[0].name.first])
   }
 
 
-  ngOnChanges() {
-    console.log('fuck');
-  }
 
   ngOnInit(): void {
-    this.displayUser(0);
-    // console.log(this.userType);
-    // console.log(this.dataArrays);
-
-
-    //console.log(this.firstName);
-
   }
 
 }

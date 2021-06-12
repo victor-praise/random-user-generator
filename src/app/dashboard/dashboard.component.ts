@@ -10,43 +10,23 @@ import { Router } from '@angular/router';
 
 
 export class DashboardComponent implements OnInit {
-
-  arrayLength: any;
-  custom: string = 'custom';
-  dataArrays = [];
-  userType;
+  search;
   constructor(private apiCall:ApiCallService, private router:Router) {
 
   }
 
   displayUser=(usertype)=>{
-
     switch (usertype) {
       case 0:
-      this.apiCall.getUser().subscribe(
-        res=>{
-          this.dataArrays=res.results;
-          this.userType='All Users';
-        }
-      )
+      this.router.navigate(['dashboard/users', 'allUsers'])
       break;
 
       case 1:
-        this.apiCall.getFemaleUsers().subscribe(
-          res => {
-            this.dataArrays = res.results;
-            this.userType = 'Female Users';
-          }
-        )
+        this.router.navigate(['dashboard/users', 'femaleUsers'])
         break;
 
       case 2:
-        this.apiCall.getMaleUsers().subscribe(
-          res => {
-            this.dataArrays = res.results;
-            this.userType = 'Male Users';
-          }
-        )
+        this.router.navigate(['dashboard/users', 'maleUsers'])
         break;
 
       default:

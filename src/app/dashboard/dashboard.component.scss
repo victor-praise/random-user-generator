@@ -6,7 +6,6 @@
 }
 .intro-user-select-container,
 .display-user-container {
-  //border: 1px solid red;
   width: 50%;
   display: flex;
 }
@@ -17,7 +16,6 @@
 
 .display-user-container {
   padding: 10px 10px 20px 35px;
-  //justify-content: flex-end;
 }
 .display-user-content {
   background-color: rgba(222, 232, 241, 1);
@@ -29,10 +27,7 @@
 .intro-user-content {
   font-size: 12px;
 }
-.user-type {
-  font-size: 1.35rem;
-  font-weight: 500;
-}
+
 .header {
   &-one {
     font-size: 35px;

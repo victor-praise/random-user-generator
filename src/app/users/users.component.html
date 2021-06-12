@@ -10,7 +10,7 @@
   </div>
 
   <div class="view-all-users">
-    <div class="users-card" (click)="dynamicParameter(users.email)"
+    <div class="users-card" (click)="dynamicUser(users.email)"
       *ngFor="let users of dataArray | filter:search | paginate: {itemsPerPage: 4,currentPage: pageNumber, totalItems: dataArray.length, id:custom}"
       >
       <div class="profile-picture">
@@ -26,12 +26,12 @@
       </div>
     </div>
   </div>
-  <!-- <router-outlet></router-outlet> -->
+  
   <pagination-template #p="paginationApi" [id]="custom" (pageChange)="pageNumber = $event">
     <div class="custom-pagination">
-      <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
-        <span *ngIf="!p.isFirstPage()" (click)="p.previous()">
-          something </span>
+      <div class="pagination-previous hover-pagination" [class.disabled]="p.isFirstPage()" *ngIf="!p.isFirstPage()">
+        <span  (click)="p.previous()">
+        <i class="fas fa-arrow-left"></i></span>
       </div>
       <div class="page-number" *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
         <span (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value" style="display: none;">{{
@@ -40,8 +40,8 @@
           <span style="display: none;">{{ page.label }}</span>
         </div>
       </div>
-      <div class="pagination-next" [class.disabled]="p.isLastPage()">
-        <span *ngIf="!p.isLastPage()" (click)="p.next()"> > fdfdffd</span>
+      <div class="pagination-next hover-pagination" [class.disabled]="p.isLastPage()" *ngIf="!p.isLastPage()">
+        <span  (click)="p.next()"> <i class="fas fa-arrow-right"></i></span>
       </div>
     </div>
 
