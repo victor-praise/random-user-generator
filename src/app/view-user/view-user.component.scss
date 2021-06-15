@@ -1,0 +1,56 @@
+
+.user,.user-address,.user-contact{
+  font-size: 0.85rem;
+}
+
+.user-name{
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.user-contact{
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.phone-number {
+  margin-left: 2px;
+}
+
+.phone-number,
+.email {
+ margin-bottom: 5px;
+}
+.user-card{
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 44px rgba(37, 42, 62, 0.08);
+  color: rgba(37, 42, 62, 0.5);
+  padding: 20px 35px 35px 35px;
+}
+
+.user{
+  font-size: 0.65rem;
+  font-style: italic;
+  margin-bottom: 7px;
+  cursor: pointer;
+  .profile-picture {
+    img {
+      border-radius: 100%;
+      border: 3px solid #335aa3;
+    }
+  }
+}
+
+.back-button{
+  margin-bottom: 32px;
+  color: #335AA3;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 400;
+  width: 15%;
+  img{
+    margin-right: 8px;
+  }
+
+}

@@ -1,20 +1,25 @@
 <div class="container-content">
           <div class="view-all-users">
-            <div class="back-button" (click)="back()">
-              back
-            </div>
-            <div class="users-card">
-
-              <div class="profile-picture">
-                <img src="{{user[0].picture.large}}" alt="user">
-              </div>
-              <div class="user-details">
-                  <div class="user-name">{{user[0].name.first}} {{user[0].name.last}}</div>
-                  <div class="user-address">2972 Westheimer Rd. Santa Ana, Illinois 85486</div>
-                <div class="user-contact">
-                  <div class="email"><img src="../../assets/images/Message.svg" alt="email_image"> {{user[0].email}}</div>
-                  <div class="phone-number"><img src="../../assets/images/Call.svg" alt="call_image"> {{user[0].phone}}</div>
+            <div class="user-card">
+                <div class="back-button" (click)="back()">
+                  <!-- <i class="fas fa-arrow-left"></i> Back -->
+                  <img src="../../assets/images/Arrow - Right.png" alt=""> Back
                 </div>
+              <div class="user">
+                    <div class="profile-picture">
+                      <img src="{{user[0].picture.large}}" alt="user">
+                    </div>
+                    <div class="user-details">
+                      <div class="user-name">{{user[0].name.first}} {{user[0].name.last}}</div>
+                      <div class="user-address">{{user[0].location.street.number}} {{user[0].location.street.name}}.
+                        {{user[0].location.city}}, {{user[0].location.state}}
+                        {{user[0].location.postcode}}</div>
+                      <div class="user-contact">
+                        <div class="email"><img src="../../assets/images/Message.svg" alt="email_image"> {{user[0].email}}</div>
+                        <div class="phone-number"><img src="../../assets/images/Call.svg" alt="call_image"> {{user[0].phone}}</div>
+                        <div class="phone-number"><img src="../../assets/images/Call.svg" alt="call_image"> {{user[0].cell}}</div>
+                      </div>
+                    </div>
               </div>
             </div>
 </div>

@@ -15,6 +15,8 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  // function determines which type of user is viewed, defaults to all users
+
   displayUser=(usertype)=>{
     switch (usertype) {
       case 0:
@@ -37,7 +39,6 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.displayUser(0);
   }
 
 

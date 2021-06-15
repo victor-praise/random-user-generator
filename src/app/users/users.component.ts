@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from '../api-call.service';
-
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -15,9 +15,10 @@ export class UsersComponent implements OnInit {
   singleUser;
   userType:string;
   apiError;
+  country:boolean=true;
 
 
-  constructor(private apiCall: ApiCallService, private router: Router, private route: ActivatedRoute) {
+  constructor(private apiCall: ApiCallService, private router: Router, private route: ActivatedRoute, private spinner: NgxSpinnerService) {
     this.route.params.subscribe(params => {
       switch (params.usertype) {
         case 'allUsers':
@@ -42,10 +43,14 @@ export class UsersComponent implements OnInit {
   }
   // displays all users
   displayAllUsers=()=>{
+    this.spinner.show();
     this.apiCall.getUser().subscribe(
       res => {
         this.dataArray = res.results;
         this.userType = 'All Users';
+        this.spinner.hide();
+        console.log(res.results);
+
       },
       err=>{
         this.apiError=err;
@@ -55,10 +60,12 @@ export class UsersComponent implements OnInit {
 
   // displays only male users
   displayMaleUsers=()=>{
+    this.spinner.show();
     this.apiCall.getMaleUsers().subscribe(
       res => {
         this.dataArray = res.results;
         this.userType = 'Male Users';
+        this.spinner.hide();
       },
       err => {
         this.apiError = err;
@@ -68,10 +75,12 @@ export class UsersComponent implements OnInit {
 
   // // displays only female users
   displayFemaleUsers=()=>{
+    this.spinner.show();
     this.apiCall.getFemaleUsers().subscribe(
       res => {
         this.dataArray = res.results;
         this.userType = 'Female Users';
+        this.spinner.hide();
       },
       err => {
         this.apiError = err;
@@ -88,8 +97,13 @@ export class UsersComponent implements OnInit {
   }
 
 
+// toggles users country
+  showCountry(){
+    this.country = !this.country;
+  }
 
   ngOnInit(): void {
+
   }
 
 }

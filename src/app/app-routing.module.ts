@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'dashboard', component:DashboardComponent,children:[
     { path: 'user/:data', component: ViewUserComponent },
     {path:'users/:usertype', component:UsersComponent},
-    { path: '', pathMatch: 'full', redirectTo: 'users/' },
+    { path: '', pathMatch: 'full', redirectTo: 'users/allUsers' },
 
   ]},
 
