@@ -10,10 +10,8 @@ import { Router } from '@angular/router';
 
 
 export class DashboardComponent implements OnInit {
-  search;
-  constructor(private apiCall:ApiCallService, private router:Router) {
 
-  }
+  constructor(private apiCall:ApiCallService, private router:Router) {}
 
   // function determines which type of user is viewed, defaults to all users
 

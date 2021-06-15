@@ -1,7 +1,18 @@
+<!-- spinner -->
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
   <p style="color: white"> Getting Users... </p>
 </ngx-spinner>
+<!-- api error popup -->
+<div class="overlays" *ngIf="apiError">
+  <div class="pop-up-message">
+    <div class="message">
+      {{apiErrorMessage}}
+    </div>
+    <button (click)="closePopup()">Ok</button>
+  </div>
+</div>
 
+<!-- content -->
 <div class="display-user-content">
   <span class="user-type">{{userType}}</span>
   <div class="search-toggle-user">
@@ -26,7 +37,7 @@
       </div>
       <div class="user-details">
         <div class="user-name">{{users.name.first}} {{users.name.last}}</div>
-        <div class="user-address">  {{users.location.street.number}} {{users.location.street.name}}. {{users.location.city}}, {{users.location.state}} {{users.location.postcode}}</div>
+        <div class="user-address">  {{users.location.street.number}} {{users.location.street.name}}. {{users.location.city}}, {{users.location.state}} {{users.location.postcode}}. <span *ngIf="country"> {{users.location.country}}</span></div>
         <div class="user-contact">
           <div class="email"><img src="../../assets/images/Message.svg" alt="email_image"> {{users.email}}</div>
           <div class="phone-number"><img src="../../assets/images/Call.svg" alt="call_image"> {{users.phone}}</div>

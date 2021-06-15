@@ -13,7 +13,7 @@
                       <div class="user-name">{{user[0].name.first}} {{user[0].name.last}}</div>
                       <div class="user-address">{{user[0].location.street.number}} {{user[0].location.street.name}}.
                         {{user[0].location.city}}, {{user[0].location.state}}
-                        {{user[0].location.postcode}}</div>
+                        {{user[0].location.postcode}}. <span *ngIf="country"> {{user[0].location.country}}</span></div>
                       <div class="user-contact">
                         <div class="email"><img src="../../assets/images/Message.svg" alt="email_image"> {{user[0].email}}</div>
                         <div class="phone-number"><img src="../../assets/images/Call.svg" alt="call_image"> {{user[0].phone}}</div>

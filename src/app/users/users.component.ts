@@ -14,7 +14,8 @@ export class UsersComponent implements OnInit {
   search:string;
   singleUser;
   userType:string;
-  apiError;
+  apiError:boolean = false;
+  apiErrorMessage:string;
   country:boolean=true;
 
 
@@ -37,9 +38,11 @@ export class UsersComponent implements OnInit {
           break;
       }
     });
+  }
 
-
-
+  // closes error popup
+  closePopup=()=>{
+    this.apiError=false;
   }
   // displays all users
   displayAllUsers=()=>{
@@ -53,7 +56,11 @@ export class UsersComponent implements OnInit {
 
       },
       err=>{
-        this.apiError=err;
+        console.log(err);
+
+        this.apiErrorMessage = err.message;
+        this.spinner.hide();
+        this.apiError = true;
       }
     )
   }
@@ -68,7 +75,9 @@ export class UsersComponent implements OnInit {
         this.spinner.hide();
       },
       err => {
-        this.apiError = err;
+        this.apiErrorMessage = err.message;
+        this.spinner.hide();
+        this.apiError = true;
       }
     )
   }
@@ -83,7 +92,9 @@ export class UsersComponent implements OnInit {
         this.spinner.hide();
       },
       err => {
-        this.apiError = err;
+        this.apiErrorMessage = err.message;
+        this.spinner.hide();
+        this.apiError = true;
       }
     )
   }
@@ -93,12 +104,13 @@ export class UsersComponent implements OnInit {
   dynamicUser = (email) => {
     this.singleUser = this.dataArray.filter(user => email == user.email);
      localStorage.setItem('user', JSON.stringify(this.singleUser));
+     localStorage.setItem('country', JSON.stringify(this.country));
     this.router.navigate(['dashboard/user', this.singleUser[0].name.first])
   }
 
 
 // toggles users country
-  showCountry(){
+  showCountry=()=>{
     this.country = !this.country;
   }
 

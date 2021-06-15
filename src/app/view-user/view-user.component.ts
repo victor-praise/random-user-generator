@@ -8,6 +8,7 @@ import { Router} from '@angular/router';
 })
 export class ViewUserComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
+  country = JSON.parse(localStorage.getItem('country'));
   constructor(private router: Router,) {
 
    }
