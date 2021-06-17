@@ -1,5 +1,5 @@
 # LumbexAssesment
-
+deployment link: https://randomusergenerator-ab9cd6.netlify.app/
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
 
 ## Development server
