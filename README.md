@@ -1,4 +1,4 @@
-
+## A website that generates both male and female characters
 ## deployment link: https://randomusergenerator-ab9cd6.netlify.app/
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
 
